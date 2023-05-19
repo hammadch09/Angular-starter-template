@@ -1,0 +1,21 @@
+<button
+    *ngIf="routerLink"
+    mat-flat-button
+    type="{{ type }}"
+    class="{{ isSecondary ? 'gray' : 'ast' }} fw-semibold d-block"
+    [ngClass]="class"
+    [routerLink]="[routerLink]"
+>
+    <img *ngIf="isImage" [src]="imagePath" alt="{{ imageAlt }}" />
+    {{ text }}
+</button>
+<button
+    *ngIf="!routerLink"
+    mat-flat-button
+    type="{{ type }}"
+    class="{{ isSecondary ? 'gray' : 'ast' }} fw-semibold d-block"
+    [ngClass]="class"
+>
+    <img *ngIf="isImage" [src]="imagePath" alt="{{ imageAlt }}" />
+    {{ text }}
+</button>

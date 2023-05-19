@@ -1,0 +1,10 @@
+<!-- <app-scheduler></app-scheduler> -->
+<div
+    [class.dark-theme]="themeService.isDark()"
+    [class.card-borderd-theme]="themeService.isCardBorder()"
+    [class.card-border-radius]="themeService.isCardBorderRadius()"
+    [class.rtl-enabled]="themeService.isRTLEnabled()"
+>
+    <router-outlet></router-outlet>
+    <app-customizer-setting></app-customizer-setting>
+</div>

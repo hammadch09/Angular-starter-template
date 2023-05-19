@@ -1,0 +1,57 @@
+<div class="ast-form-group" [class.without-icon]="!iconLabel">
+    <label class="d-block mb-12 fw-semibold gray-color">
+        {{ title }} <span *ngIf="required">*</span>
+    </label>
+    <mat-form-field appearance="fill">
+        <i *ngIf="iconLabel" [ngClass]="icon"></i>
+        <mat-label>{{ placeholder }}</mat-label>
+        <input
+            matInput
+            class=""
+            [type]="type"
+            [min]="min"
+            [value]="value || ''"
+            [placeholder]="placeholder || ''"
+            [disabled]="isDisabled ? true : null"
+            (keyup)="onKeyup($any($event.target).value)"
+            (change)="onChange($any($event.target).value)"
+            [readonly]="readonly"
+            (blur)="onBlur()"
+        />
+    </mat-form-field>
+    <div
+        class="form-field"
+        [class.form-field_error]="hasError()"
+        *ngIf="hasError()"
+    >
+        <div class="form-field__error">
+            <ng-container *ngIf="control && errorKey" [ngSwitch]="errorKey">
+                <span *ngSwitchCase="'min'"
+                    >Minimum {{ control.errors![errorKey].min }}</span
+                >
+                <span *ngSwitchCase="'max'"
+                    >Maximum {{ control.errors![errorKey].max }}</span
+                >
+                <span *ngSwitchCase="'required'">This field is required</span>
+                <span *ngSwitchCase="'requiredtrue'"
+                    >This field is required</span
+                >
+                <span *ngSwitchCase="'minlength'"
+                    >At least
+                    {{ control.errors![errorKey].requiredLength }}
+                    character</span
+                >
+                <span *ngSwitchCase="'maxlength'"
+                    >No more than
+                    {{ control.errors![errorKey].requiredLength }}
+                    character</span
+                >
+                <span *ngSwitchCase="'pattern'">
+                    <span *ngIf="patternError">{{ patternError }}</span>
+                    <span *ngIf="!patternError">Pattern dose not match</span>
+                </span>
+                <span *ngSwitchCase="'min'"></span>
+            </ng-container>
+        </div>
+    </div>
+</div>

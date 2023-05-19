@@ -1,0 +1,52 @@
+<div class="ast-form-group without-icon">
+    <label class="d-block mb-12 fw-semibold gray-color">{{ title }}</label>
+    <mat-form-field appearance="fill">
+        <mat-label>{{ placeholder }}</mat-label>
+        <mat-select
+            [value]="value"
+            [disabled]="isDisabled"
+            (selectionChange)="onChange($event)"
+            (blur)="onBlur()"
+        >
+            <mat-option>-- Select --</mat-option>
+            <mat-option *ngFor="let item of items" [value]="item.id">{{
+                item.name
+            }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div
+        class="form-field"
+        [class.form-field_error]="hasError()"
+        *ngIf="hasError()"
+    >
+        <div class="form-field__error">
+            <ng-container *ngIf="control && errorKey" [ngSwitch]="errorKey">
+                <span *ngSwitchCase="'min'"
+                    >Minimum {{ control.errors![errorKey].min }}</span
+                >
+                <span *ngSwitchCase="'max'"
+                    >Maximum {{ control.errors![errorKey].max }}</span
+                >
+                <span *ngSwitchCase="'required'">This field is required</span>
+                <span *ngSwitchCase="'requiredtrue'"
+                    >This field is required</span
+                >
+                <span *ngSwitchCase="'minlength'"
+                    >At least
+                    {{ control.errors![errorKey].requiredLength }}
+                    character</span
+                >
+                <span *ngSwitchCase="'maxlength'"
+                    >No more than
+                    {{ control.errors![errorKey].requiredLength }}
+                    character</span
+                >
+                <span *ngSwitchCase="'pattern'">
+                    <span *ngIf="patternError">{{ patternError }}</span>
+                    <span *ngIf="!patternError">Pattern dose not match</span>
+                </span>
+                <span *ngSwitchCase="'min'"></span>
+            </ng-container>
+        </div>
+    </div>
+</div>

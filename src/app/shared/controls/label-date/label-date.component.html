@@ -1,0 +1,60 @@
+<div class="ast-form-group">
+    <label class="d-block mb-12 fw-semibold gray-color">{{ title }}</label>
+    <mat-form-field appearance="fill" class="date-input">
+        <mat-label>{{ placeholder }}</mat-label>
+        <input
+            matInput
+            [matDatepicker]="picker2"
+            [min]="min"
+            [max]="max"
+            [disabled]="isDisabled ? true : null"
+            [value]="inputValue"
+            (dateChange)="onChanged($event)"
+            (dateInput)="onChanged($event)"
+        />
+        <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker2"
+            [disabled]="isDisabled"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <div
+        class="form-field"
+        [class.form-field_error]="hasError()"
+        *ngIf="hasError()"
+    >
+        <div class="form-field__error">
+            <ng-container *ngIf="control && errorKey" [ngSwitch]="errorKey">
+                <span *ngSwitchCase="'min'"
+                    >Minimum {{ control.errors![errorKey].min }}</span
+                >
+                <span *ngSwitchCase="'max'"
+                    >Maximum {{ control.errors![errorKey].max }}</span
+                >
+                <span *ngSwitchCase="'required'">This field is required</span>
+                <span *ngSwitchCase="'requiredtrue'"
+                    >This field is required</span
+                >
+                <span *ngSwitchCase="'minlength'"
+                    >At least
+                    {{ control.errors![errorKey].requiredLength }}
+                    character</span
+                >
+                <span *ngSwitchCase="'maxlength'"
+                    >No more than
+                    {{ control.errors![errorKey].requiredLength }}
+                    character</span
+                >
+                <span *ngSwitchCase="'pattern'">
+                    <span *ngIf="patternError">{{ patternError }}</span>
+                    <span *ngIf="!patternError">Pattern dose not match</span>
+                </span>
+                <span *ngSwitchCase="'min'"></span>
+            </ng-container>
+            <ng-container *ngIf="not18">
+                <span>Minimum age should be 18.</span>
+            </ng-container>
+        </div>
+    </div>
+</div>

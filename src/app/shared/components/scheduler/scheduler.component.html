@@ -1,0 +1,43 @@
+<div class="h-100vh pt-50 pb-50">
+    <div class="timeline-container" #container (scroll)="onScroll($event)">
+        <!-- [ngStyle]="{ 'width': timelineWidth + 'px' }"> -->
+        <div class="item-container" #itemContainer>
+            <div
+                *ngFor="let item of timeline"
+                class="timeline-item"
+                [ngStyle]="{
+                    'min-width': timelineItemWidth + 'px'
+                }"
+            >
+                <!-- {{ item.date | date:'MMM-yy' }} -->
+                <div class="item-l1" [id]="item.divId">
+                    <!-- {{ item.date | date:'MMM-yy' }} -->
+                    {{ item.label }}
+                </div>
+                <div class="iteml2-container">
+                    <div
+                        *ngFor="let itemL2 of item.nodes"
+                        class="timeline-iteml2"
+                        [ngStyle]="{ width: timelineItemWidth + 'px' }"
+                    >
+                        <div class="item-l2" [id]="itemL2.divId">
+                            <!-- {{ item.date | date:'MMM-yy' }} -->
+                            {{ itemL2.label }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item-detail" [ngStyle]="{ width: timelineWidth + 'px' }">
+            <div class="tree-container">
+                <div class="tree-header">Resources</div>
+                <div *ngFor="let resource of resources" class="tree-item">
+                    {{ resource.name }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 'left': calculateLeft(item) + 'px', -->
+<!-- (window:scroll)="onScroll($event)" -->

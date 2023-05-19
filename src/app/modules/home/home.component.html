@@ -1,0 +1,20 @@
+<!-- Sidebar Start-->
+<app-sidebar></app-sidebar>
+<!-- Sidebar End-->
+<div
+    class="main-content d-flex flex-column"
+    [ngClass]="{ active: isToggled }"
+    [class.right-sidebar]="themeService.isRightSidebar()"
+    [class.hide-sidebar]="themeService.isHideSidebar()"
+>
+    <!-- Header Start-->
+    <app-header></app-header>
+    <!-- Header End-->
+
+    <router-outlet></router-outlet>
+
+    <!-- Footer Start-->
+    <div class="flex-grow-1"></div>
+    <app-footer></app-footer>
+    <!-- Footer End-->
+</div>
